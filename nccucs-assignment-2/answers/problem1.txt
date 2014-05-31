@@ -1,0 +1,8 @@
+[Determine Requirements for Graph]
+依資料結構教的Graph定義: G=(V,E), 其中G為graph, V為vertex(即為此作業的node), E為edge
+則Graph至少需要提供下面的API讓外界能與G=(V,E)做互動
+
+-addNode(n): 新增node(即vertex)至此graph中, n為新增的node, 內容可能包括此node的name和weight
+-addEdge(n1,n2): 新增兩個node:n1和n2之間的edge, 因為此graph為有向圖, 故須定義n1為from, n2為to以表示方向.
+-listNode: 將此graph的所有node列出, 和listEdge一同呈現時可看出此graph的整體架構
+-listEdge: 將此graph的所有edge列出, 和listNode一同呈現時可看出此graph的整體架構

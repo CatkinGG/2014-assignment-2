@@ -1,0 +1,11 @@
+[Understanding the Shortest Path Algorithm]
+Question 1:
+A:因為path to x代表目前到x的shortest path所花的權重, priority queue若僅考慮cost of x將會忽略其它當前cost比較高但整體cost較低的path如下例:
+a(1)->b(1)->c(1)->d(1)->e(1)->g(1)
+    |                         ^
+    ->f(2)--------------------|
+從a出發想找至g的shortest path, 若只看當前cost則會不斷選擇花費一的node走, path會是a,b,c,d,e,g而耗費6.
+若是原本演算法看整體的shortest path, 會在比較path d(cost4)和path f(cost3)時選擇f, 然後下一回合走到g而僅耗費4.
+
+Question 2:
+A:因為現在edge有權重, 從queueMin連向仍在active的c產生的path可能會比原本c的path還要短, 而edge沒權重且node代表street的方式不會有此狀況發生.
