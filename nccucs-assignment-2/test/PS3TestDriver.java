@@ -55,7 +55,7 @@ public class PS3TestDriver {
 
     /** String -> Graph: maps the names of graphs to the actual graph **/
     //TODO for the student: Parameterize the next line correctly.
-    //private final Map<String, _______> graphs = new HashMap<String, ________>();
+    private final Map<String, Graph<WeightedNode>> graphs = new HashMap<String, Graph<WeightedNode>>();
     /** String -> WeightedNode: maps the names of nodes to the actual node **/
     private final Map<String, WeightedNode> nodes = new HashMap<String, WeightedNode>();
     private final PrintWriter output;
@@ -140,9 +140,9 @@ public class PS3TestDriver {
 
     private void createGraph(String graphName) {
         // Insert your code here.
-
-        // graphs.put(graphName, ___);
-        // output.println(...);
+    	
+        graphs.put(graphName, new Graph<WeightedNode>());
+        output.println("created graph " + graphName);
     }
 
     private void createNode(List<String> arguments) {
@@ -159,8 +159,8 @@ public class PS3TestDriver {
     private void createNode(String nodeName, String cost) {
         // Insert your code here.
 
-        // nodes.put(nodeName, ___);
-        // output.println(...);
+        nodes.put(nodeName, new WeightedNode(nodeName,Integer.parseInt(cost)));
+        output.println("created node "+nodeName+" with cost "+cost);
     }
 
     private void addNode(List<String> arguments) {
@@ -177,9 +177,11 @@ public class PS3TestDriver {
     private void addNode(String graphName, String nodeName) {
         // Insert your code here.
 
-        // ___ = graphs.get(graphName);
-        // ___ = nodes.get(nodeName);
-        // output.println(...);
+        Graph<WeightedNode> G = graphs.get(graphName);
+        WeightedNode N = nodes.get(nodeName);
+        G.addNode(N);
+        graphs.put(nodeName,G);
+        output.println("added node "+nodeName+" to "+graphName);
     }
 
     private void addEdge(List<String> arguments) {
@@ -197,10 +199,12 @@ public class PS3TestDriver {
     private void addEdge(String graphName, String parentName, String childName) {
         // Insert your code here.
 
-        // ___ = graphs.get(graphName);
-        // ___ = nodes.get(parentName);
-        // ___ = nodes.get(childName);
-        // output.println(...);
+    	Graph<WeightedNode> G = graphs.get(graphName);
+    	WeightedNode n1 = nodes.get(parentName);
+    	WeightedNode n2 = nodes.get(childName);
+    	G.addEdge(n1,n2);
+    	graphs.put(graphName,G);
+        output.println("added edge from "+parentName+" to "+childName+" in "+graphName);
     }
 
 
@@ -216,8 +220,8 @@ public class PS3TestDriver {
     private void listNodes(String graphName) {
         // Insert your code here.
 
-        // ___ = graphs.get(graphName);
-        // output.println(...);
+    	Graph<WeightedNode> G = graphs.get(graphName);
+        output.println("graphName contains:"+G.listNode());
     }
 
     private void listChildren(List<String> arguments) {
@@ -233,9 +237,9 @@ public class PS3TestDriver {
     private void listChildren(String graphName, String parentName) {
         // Insert your code here.
 
-        // ___ = graphs.get(graphName);
-        // ___ = nodes.get(parentName);
-        // output.println(...);
+    	Graph<WeightedNode> G = graphs.get(graphName);
+    	WeightedNode N = nodes.get(parentName);
+        output.println("the children of parentNode in graphName are:"+G.listEdge(N));
     }
 
     private void findPath(List<String> arguments) {
